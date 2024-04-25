@@ -35,4 +35,20 @@ public class BoardDao {
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int bno){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReply", bno);
 	}
+	
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
+	}
+	
+	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+	
+	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertReply", r);
+	}
+	
+	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectTopBoardList");
+	}
 }

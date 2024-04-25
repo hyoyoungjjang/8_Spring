@@ -39,4 +39,13 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
+	<!-- property : setter를 통한 주입
+		constructor-arg : 생성자를 통한 주입 -->
+	<!-- 파일업로드 관련 빈등록 -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+		<property name="maxInMemorySize" value="100000000"/>
+	</bean>
+	
+	
 </beans>
