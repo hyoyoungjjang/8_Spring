@@ -1,5 +1,7 @@
 package com.kh.spring.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,7 +141,7 @@ public class MemberController {
 	//2. 스프링에서 제공하는 BodelAndView객체사용
 	
 	@RequestMapping("login.me")
-	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {
+	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session, String saveId, HttpServletResponse response) {
 		//압호화 전
 //		Member loginUser = memberService.loginMember(m);
 //		
@@ -176,7 +178,12 @@ public class MemberController {
 			mv.addObject("errorMsg", "비밀번호가 일치하지 않습니다.");
 			
 			mv.setViewName("common/errorPage");
-		} else {
+		} else {	
+			Cookie ck = new Cookie("saveId", loginUser.getUserId());
+			if(saveId == null) {
+				ck.setMaxAge(0);
+			}
+			response.addCookie(ck);
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		}
