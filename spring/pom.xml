@@ -15,7 +15,7 @@
 	
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.3.14</org.springframework-version>
+		<org.springframework-version>5.3.22</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -226,6 +226,37 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.6</version>
 		</dependency>
+		
+		<!-- 로깅 -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.17.1</version>
+		</dependency>
+		
+		<!-- spring-aop -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- aspectjweaver : : aspectj에 joinpont를 추가하기위한 라이브러리-->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+		<!--aspectj실행을 위한 라이브러리 aspectj : aop라이브러리  -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+		
+		
 		
 	</dependencies>
 	

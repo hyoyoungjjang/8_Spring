@@ -8,6 +8,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +25,21 @@ import com.kh.spring.board.service.BoardService;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
 	
+	//private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@RequestMapping("list.bo")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int boardCount = boardService.selectListCount();
+//		log.info("writer실행");
 		
 		PageInfo pi = Pagination.getPageInfo(boardCount, currentPage, 10, 5);
 		ArrayList<Board> list = boardService.selectList(pi);
@@ -44,7 +52,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "detail.bo")
 	public String selectBoard(int bno, Model model) {
-		
+//		log.info("writer실행");
 		int result = boardService.increaseCount(bno);
 		
 		if (result > 0) {
@@ -63,12 +71,13 @@ public class BoardController {
 	@RequestMapping(value = "rlist.bo", produces="application/json; charset-UTF-8")
 	public String ajaxSelectReplyList(int bno) {
 		ArrayList<Reply> list = boardService.selectReply(bno);
-		
+//		log.info("writer실행");
 		return new Gson().toJson(list);
 	}
 	
 	@RequestMapping("enrollForm.bo")
 	public String enrollForm() {
+//		log.info("writer실행");
 		return "board/boardEnrollForm";
 	}
 	
