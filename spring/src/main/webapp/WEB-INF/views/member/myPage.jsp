@@ -22,19 +22,19 @@
                     <input type="text" class="form-control" id="userId" value="${loginUser.userId}" name="userId" readonly> <br>
 
                     <label for="userName">* Name : </label>
-                    <input type="text" class="form-control" id="userName" value="${loginUser.userName}" name="userName" required> <br>
+                    <input type="text" class="form-control" id="userName" value="${loginUser.userName }" name="userName" required> <br>
 
                     <label for="email"> &nbsp; Email : </label>
-                    <input type="text" class="form-control" id="email" value="${loginUser.email}" name="email"> <br>
+                    <input type="text" class="form-control" id="email" value="${loginUser.email }" name="email"> <br>
 
                     <label for="age"> &nbsp; Age : </label>
-                    <input type="number" class="form-control" id="age" value="${loginUser.age}" name="age"> <br>
+                    <input type="number" class="form-control" id="age" value="${loginUser.age }" name="age"> <br>
 
                     <label for="phone"> &nbsp; Phone : </label>
-                    <input type="tel" class="form-control" id="phone" value="${loginUser.phone}" name="phone"> <br>
+                    <input type="tel" class="form-control" id="phone" value="${loginUser.phone }" name="phone"> <br>
                     
                     <label for="address"> &nbsp; Address : </label>
-                    <input type="text" class="form-control" id="address" value="${loginUser.address}" name="address"> <br>
+                    <input type="text" class="form-control" id="address" value="${loginUser.address }" name="address"> <br>
                     
                     <label for=""> &nbsp; Gender : </label> &nbsp;&nbsp;
                     <input type="radio" id="Male" value="M" name="gender">
@@ -44,9 +44,9 @@
                 </div> 
                 
                 <script>
-                	$function(){
-                		if("${loginUser.gender}" != ""){
-                			${'input[value="${loginUser.gender}"]'}.attr("checked", true);
+                	$(function(){
+                		if("${loginUser.gender}" != "") {
+                			$('input[value="${loginUser.gender}"]').attr("checked", true);
                 		}
                 	})
                 </script>

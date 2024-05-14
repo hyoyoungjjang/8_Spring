@@ -12,16 +12,16 @@ import com.kh.spring.common.model.vo.PageInfo;
 
 @Repository
 public class BoardDao {
-	
+
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectListCount");
 	}
 	
-	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
-		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("boardMapper.selectList",null, rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null, rowBounds);
 	}
 	
 	public int increaseCount(SqlSessionTemplate sqlSession, int bno) {
@@ -29,7 +29,7 @@ public class BoardDao {
 	}
 	
 	public Board selectBoard(SqlSessionTemplate sqlSession, int bno) {
-		return sqlSession.selectOne("boardMapper.selectBoard", bno);		
+		return sqlSession.selectOne("boardMapper.selectBoard", bno);
 	}
 	
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int bno){

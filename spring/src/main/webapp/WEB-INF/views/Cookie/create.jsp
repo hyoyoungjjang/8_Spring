@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>쿠키 생성 완료</h1>
+	쿠키생성완료
 	
-	<c:if test="${not empty cookie.test1} ">
-		${cookie.test1} 
+	<c:if test="${not empty cookie.test}">
+		${cookie.test.value}
 	</c:if>
 </body>
 </html>

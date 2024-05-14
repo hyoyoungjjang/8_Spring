@@ -13,7 +13,7 @@ import com.kh.spring.common.model.vo.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -22,36 +22,32 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int selectListCount() {
-		return boardDao.selectListCount(sqlSession);
+		int count = boardDao.selectListCount(sqlSession);
+		return count;
 	}
 
 	@Override
-	public ArrayList<Board> selsecList(PageInfo pi) {
-		
+	public ArrayList<Board> selectList(PageInfo pi) {
 		return boardDao.selectList(sqlSession, pi);
 	}
 
 	@Override
 	public int increaseCount(int bno) {
-		
 		return boardDao.increaseCount(sqlSession, bno);
 	}
 
 	@Override
 	public Board selectBoard(int bno) {
-
 		return boardDao.selectBoard(sqlSession, bno);
 	}
 
 	@Override
 	public ArrayList<Reply> selectReply(int bno) {
-		
 		return boardDao.selectReply(sqlSession, bno);
 	}
 
 	@Override
 	public int insertBoard(Board b) {
-		
 		return boardDao.insertBoard(sqlSession, b);
 	}
 
@@ -62,14 +58,14 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int insertReply(Reply r) {
-		
 		return boardDao.insertReply(sqlSession, r);
 	}
 
 	@Override
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
-		
 	}
-
+	
+	
+	
 }

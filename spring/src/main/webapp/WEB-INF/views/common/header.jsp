@@ -16,15 +16,9 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 <!-- Semantic UI theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 
-<!-- 
-    RTL version
--->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css"/>
-<!-- Default theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.rtl.min.css"/>
-<!-- Semantic UI theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.rtl.min.css"/>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -85,14 +79,14 @@
 </style>
 </head>
 <body>
-	
-	<c:if test="${not empty alertMsg }">
+
+	<c:if test="${ not empty alertMsg}">
 		<script>
 			alertify.alert("알림","${alertMsg}");
 		</script>
 		<c:remove var="alertMsg" scope="session"/>
 	</c:if>
-	
+
 	<div id="header">
         <div id="header_1">
             <div id="header_1_left">
@@ -139,9 +133,10 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <label for="userId" class="mr-sm-2">ID :</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="userId"> <br>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="userId" value="${cookie.saveId.value}"> 
                     <input type="checkbox" name="saveId" id="saveId" checked>
-                    <label for="saveId" class="mr-sm-2">아이디저장</label> <br>
+                    <label for="saveId" class="mr-sm-2">아이디저장</label>
+                    <br>
                     <label for="userPwd" class="mr-sm-2">Password:</label>
                     <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="userPwd" name="userPwd">
                 </div>
@@ -157,6 +152,24 @@
     </div>
 
     <br clear="both">
+    
+    <script>
+    function setCookie(name, value, exp) {
+ 	    const date = new Date();
+ 	    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+ 	    document.cookie = name + '=' + escape(value) + ';expires=' + date.toUTCString() + ';path=/';
+ 	};
+ 	
+ 	function getCookie(name) {
+ 		const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+ 	    return value ? unescape(value[2]) : null;
+ 	};
+ 	
+ 	$(function(){
+ 		
+ 		console.log(getCookie("saveId"))
+ 	})
+    </script>
 
 
 </body>

@@ -45,10 +45,10 @@
                     <label for="address"> &nbsp; Address : </label>
                     <input type="text" class="form-control" id="address" placeholder="Please Enter Address" name="address"> <br>
                     
-                    <label > &nbsp; Gender : </label> &nbsp;&nbsp;
+                    <label> &nbsp; Gender : </label> &nbsp;&nbsp;
                     <input type="radio" id="Male" value="M" name="gender" checked>
                     <label for="Male">남자</label> &nbsp;&nbsp;
-                    <input type="radio" id="Female" value="F" name="">
+                    <input type="radio" id="Female" value="F" name="gender">
                     <label for="Female">여자</label> &nbsp;&nbsp;
                 </div> 
                 <br>
@@ -64,44 +64,46 @@
                 const idInput = document.querySelector("#enrollForm input[name=userId]");
                 let eventFlag;
                 idInput.onkeyup = function(ev){
-                    clearTimeout(eventFlag)
-                    //키가 눌릴때마다 해당아이디가 중복이 되는지 검사
-                    //서버에 데이터를 보내서 응답을 받아야한다 - > ajax
-					const str = ev.target.value;
-                    if(str.trim().length >= 5){//5글자이상
-                        eventFlag = setTimeout(function(){ //1.5초후에 서버로 check요청 전송
-                                                    $.ajax({
-                                                    url:"idCheck.me",
-                                                    data: {chcckId : ev.target.value}, // 체크하고싶은 사용자가 입력한 아이디
-                                                    success: function(result){
-                                                        const checkResult = document.getElementById("checkResult");
-                                                        checkResult.style.display = "block";
+                    clearTimeout(eventFlag);
+                    //키가 눌릴때마다 해당 아이디가 중복이되는지 검사
+                    //서버에 데이터를 보내서 응답을 받아야한다 -> ajax
+                    const str = ev.target.value;
+					if(str.trim().length >= 5) { // 5글자이상
+                        eventFlag = setTimeout(function(){ // 1.5초후에 서버로 check요청 전송
+                                        $.ajax({
+                                            url: "idCheck.me",
+                                            data: {checkId : ev.target.value}, // 체크하고싶은 사용자가 입력한 아이디
+                                            success: function(result){
+                                                const checkResult = document.getElementById("checkResult");
+                                                checkResult.style.display = "block";
+                                                
+                                                if(result === "NNNNN"){ //사용이 불가한경우
+                                                    //회원가입버튼 비활성화
+                                                    document.querySelector("#enrollForm button[type='submit']").disabled = true;
+                                                    
+                                                    checkResult.style.color = "red";
+                                                    checkResult.innerText = "이미 사용중인 아이디입니다.";
+                                                } else { //사용이 가능한 경우
+                                                    //회원가입버튼 활성화
+                                                    document.querySelector("#enrollForm button[type='submit']").disabled = false;
 
-                                                        if(result === "NNNN"){ //사용이 불가한경우
-                                                           //회원가입버튼 활성화
-                                                           document.querySelector("#enrollForm button[type='submit']").disabled = true;    
-                                                           checkResult.style.color = "red";
-                                                           checkResult.innerText = "이미 사용중인 아이디입니다."         
-                                                        }else{ //사용이 가능한 경우
-                                                           //회원가입버튼 활성화
-                                                           document.querySelector("#enrollForm button[type='submit']").disabled = false;         
-                                                           
-                                                           checkResult.style.color = "green";
-                                                           checkResult.innerText = "사용가능한 아이디입니다."
-                                                        }
-                                                    },
-                                                    error:function(){
-                                                        console.log("아이디 중복체크 ajax실패");
-                                                    }
-                                                })
-                                            }, 500)
-                    } else { //글자 이하.
+                                                    checkResult.style.color = "green";
+                                                    checkResult.innerText = "사용가능한 아이디입니다.";
+                                                }
+                                            },
+                                            error: function(){
+                                                console.log("아이디 중복체크 ajax 실패");
+                                            }
+                                        })
+                                    }, 300)
+                    } else { // 5글자이하
                         //disabled상태 유지
                         document.querySelector("#enrollForm button[type='submit']").disabled = true;
                         //checkResult 안보이는 상태
                         document.getElementById("checkResult").style.display = "none";
                     }
                 }
+                
             })
         </script>
 
@@ -109,6 +111,6 @@
 
     <!-- 푸터바 -->
     <jsp:include page="../common/footer.jsp" />
-
+    
 </body>
 </html>
